@@ -1,0 +1,16 @@
+{
+  "name": "to_do_list_websocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": "https://github.com/B7atis/To_Do_List_Websocket.git",
+  "author": "B7atis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  }
+}
