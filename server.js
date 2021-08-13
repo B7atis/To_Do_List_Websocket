@@ -1,5 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
+const path = require('path');
 
 const app = express();
 
@@ -10,8 +11,14 @@ const server = app.listen(process.env.PORT || 8000, () => {
 });
 const io = socket(server);
 
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
+
 io.on('connection', (socket) => {
-  console.log("New client! It's id - " + socket.id);
+  console.log("New client! It's id – " + socket.id);
 
   io.to(socket.id).emit('updateData', tasks);
   socket.on('addTask', (task) => {
@@ -25,7 +32,7 @@ io.on('connection', (socket) => {
     tasks.splice(index, 1);
     socket.broadcast.emit('removeTask', taskId);
   });
-})
+}),
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
